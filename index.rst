@@ -7,7 +7,7 @@ This tutorial aims to demonstrate how to obtain perfusion or cerebral blood flow
 Pre-requisite
 -------------
 
-1 Download and install `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_software package
+1 Download and install `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_
 
 2 Understand the basics of `ASL <http://mriquestions.com/what-is-asl.html>`_
 
