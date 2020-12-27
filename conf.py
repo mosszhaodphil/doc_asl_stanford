@@ -8,7 +8,7 @@ extensions = []
 templates_path = ['_templates']
 
 # General information about the project.
-project = u'Simple documentation'
+project = u'Documentation for Stanford ASL Data Processing'
 copyright = u'2020, Stanford University'
 author = u'Moss Zhao'
 master_doc = 'index'

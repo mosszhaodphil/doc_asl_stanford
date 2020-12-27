@@ -12,12 +12,6 @@ processing ASL data and also individual tools for more bespoke analysis.
    :maxdepth: 2
 
    cvr_tutorial
-   analysis_guide
-   tutorials
-   overview
-   gui_userguide
-   oxford_asl_userguide
-   tools
    
 References
 ==========
