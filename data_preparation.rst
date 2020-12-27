@@ -49,7 +49,7 @@ Rename the proton density M0 image::
     immv ASL_prod._ASL_NEX3_fatsupp_20190215105911_11a M0
 
 
-Visualize the images
+Visualize the Images
 --------------------
 
 We use `FSLeyes <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSLeyes>`_ to view the T1-wieghted structural and ASL images.
@@ -66,6 +66,13 @@ The proton density M0 image should look like the following:
 
 .. image:: /images/data_preparation/M0.png
 
+
+Potential Issues
+----------------
+
+It is possible that the the ASL label/control different and M0 images are store together in a single NifTI file. We may use the command tool `fslroi <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Fslutils>`_ to separate the images. ::
+
+    fslroi <input> <output> <tmin> <tsize>
 
 
 
