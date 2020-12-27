@@ -26,6 +26,16 @@ TR of M0 image: 2 seconds
 Convert from DICOM to NifTI format
 ----------------------------------
 
+We use the `dcm2niix <https://github.com/rordenlab/dcm2niix>`_ software to convert the DICOM files to NIfTI format.
+
+For the T1-weighted structural image::
+
+    command goes here
+
+For the ASL label/control difference image::
+
+    command goes here
+
 Single-PLD PCASL is used in this experiment, and the sequence parameters are similar to the ones in the ASL white paper. Specifically, the bolus duration is 1800ms, PLD is 1800ms, no background suppression, 2D EPI readout, and the gap between each slice is 42.1ms. There were 140 repeats in this data. The first 35 repeats were collected in resting condition. At repeat 35, acetazolamide was adminstered. The last 35 repeats were used as the data to quantify CBF in the stimulus condition. The data has already been split into separate data for the resting and stimulus conditions respectively. The full description of the parameters can be found in the reference paper of this tutorial.
 Calibration data was also acquired using a long TR of 4400ms and 6 repeats.
 
