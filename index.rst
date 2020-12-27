@@ -17,12 +17,19 @@ Pre-requisite
 Sample Data
 -----------
 
-We will use a sample dataset of a healthy volunteer collected by a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence.
+We will use a sample dataset of a healthy volunteer collected by a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. This dataset can be downloaded here.
+
 
 .. toctree::
    :maxdepth: 2
    
-   Data conversion
+   data_preparation
+
+   structural_image_processing
+
+   asl_pre_processing
+
+   cbf_quantification
 
 
 
