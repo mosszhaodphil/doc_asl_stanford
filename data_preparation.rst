@@ -4,9 +4,23 @@ Data Preparation
 Data description
 ----------------
 
-Cerebrovascular reserve (CVR) is defined as the maximum change in perfusion in response to a vasoactive stimulus. CVR has become an important biomarker to assess tissue health and ASL offers a non-invasive technique to measure CVR in vivo. Measuring CVR requires the quantification of perfusion under two different physiological conditions: baseline and (physiologically) stimulated. In the baseline condition, it is common for us to follow the routine procedures where we acquire data while the subject is in a resting state in the scanner. In the stimulus condition, we need to administer a stimulus to manipulate the perfusion of the subject. The choice of the stimulus depends on the availability and the condition of the subject. Nevertheless, the key component in designing a CVR experiment is to change the perfusion of the subject to a different level (from the normal resting state level).
+The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence.
 
-In this tutorial, we are going to illustrate an example CVR study in which CVR was quantified using PCASL and azetazolamide as the stimulus. Sample data can be downlowded here.
+For the ASL data, the file contains the ASL label/control difference image and the proton density M0 image. The main acquisition parameters of our sample ASL data are:
+
+labeling duration: 1.45 seconds <which dicom field>
+
+post-labeling delay: 2.025 seconds <which dicom field>
+
+labeling efficiency: 85%
+
+Number of backgroun suppressions: 3
+
+Signal reduction due to background suppression: 9%
+
+Number of excitations (NEX): 3
+
+TR of M0 image: 2 seconds
 
 
 Convert from DICOM to NifTI format
