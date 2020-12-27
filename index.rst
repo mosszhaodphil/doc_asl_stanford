@@ -10,8 +10,6 @@ processing ASL data and also individual tools for more bespoke analysis.
 
 .. toctree::
    :maxdepth: 2
-
-   cvr_tutorial
    
 References
 ==========
