@@ -1,9 +1,11 @@
+===================================================
 Arterial spin labeling (ASL) Data Analysis Tutorial
 ===================================================
 
-This tutorial aims to demonstrate how to obtain perfusion or cerebral blood flow (CBF) using ASL MRI data collected by Stanford GE 3T MRI (or PET/MRI) scanners.
+This tutorial aims to demonstrate how to obtain perfusion or cerebral blood flow (CBF) using ASL MRI data collected by GE 3T MRI (or PET/MRI) scanners at Stanford University.
 
-The pre-requisite of this tutorial includes:
+Pre-requisite
+-------------
 
 1 Download and install `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_software package
 
@@ -11,6 +13,11 @@ The pre-requisite of this tutorial includes:
 
 3 Able to visualize MRI data in NIfTI format
 
+
+Sample Data
+-----------
+
+We will use a sample dataset of a healthy volunteer collected by a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence.
 
 .. toctree::
    :maxdepth: 2
