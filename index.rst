@@ -9,9 +9,11 @@ Pre-requisite
 
 1 Download and install `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_
 
-2 Understand the basics of `ASL <http://mriquestions.com/what-is-asl.html>`_
+2 Download and install `dcm2niix <https://github.com/rordenlab/dcm2niix>`_
 
-3 Able to visualize MRI data in NIfTI format
+3 Understand the basics of `ASL <http://mriquestions.com/what-is-asl.html>`_
+
+4 Able to visualize MRI data in NIfTI format
 
 
 Sample Data
