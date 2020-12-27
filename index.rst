@@ -5,9 +5,9 @@ This tutorial aims to demonstrate how to obtain perfusion or cerebral blood flow
 
 The pre-requisite of this tutorial includes:
 
-1 Download and install `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_software package
-2 Understand the basics of `ASL <http://mriquestions.com/what-is-asl.html>`_
-3 Able to visualize MRI data in NIfTI format
+1 Download and install `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_software package.
+2 Understand the basics of `ASL <http://mriquestions.com/what-is-asl.html>`_.
+3 Able to visualize MRI data in NIfTI format.
 
 
 .. toctree::
