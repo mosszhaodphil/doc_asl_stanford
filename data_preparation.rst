@@ -4,7 +4,7 @@ Data Preparation
 Data description
 ----------------
 
-The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence.
+The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. These files were exported directly from the scanner.
 
 For the ASL data, the file contains the ASL label/control difference image and the proton density M0 image. The main acquisition parameters of our sample ASL data are:
 
@@ -30,11 +30,28 @@ We use the `dcm2niix <https://github.com/rordenlab/dcm2niix>`_ software to conve
 
 For the T1-weighted structural image::
 
-    command goes here
+    dcm2niix -o ./ -z y T1_structure
+
+Rename the T1-weighted structural image::
+
+    immv T1_structure_Ax_FSPGR_BRAVO_20190215105911_30 T1_structure
 
 For the ASL label/control difference image::
 
-    command goes here
+    dcm2niix -o ./ -z y ASL
+
+Rename the ASL label/control difference image::
+
+    immv ASL_prod._ASL_NEX3_fatsupp_20190215105911_11 ASL_diff
+
+Rename the proton density M0 image::
+
+    immv ASL_prod._ASL_NEX3_fatsupp_20190215105911_11a M0
+
+
+
+
+
 
 Single-PLD PCASL is used in this experiment, and the sequence parameters are similar to the ones in the ASL white paper. Specifically, the bolus duration is 1800ms, PLD is 1800ms, no background suppression, 2D EPI readout, and the gap between each slice is 42.1ms. There were 140 repeats in this data. The first 35 repeats were collected in resting condition. At repeat 35, acetazolamide was adminstered. The last 35 repeats were used as the data to quantify CBF in the stimulus condition. The data has already been split into separate data for the resting and stimulus conditions respectively. The full description of the parameters can be found in the reference paper of this tutorial.
 Calibration data was also acquired using a long TR of 4400ms and 6 repeats.
