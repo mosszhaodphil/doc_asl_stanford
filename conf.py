@@ -29,5 +29,5 @@ except ImportError:
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_documents = [
-    (master_doc, 'doc_simple.tex', project, author, 'manual'),
+    (master_doc, 'doc_stanford_asl.tex', project, author, 'manual'),
 ]
