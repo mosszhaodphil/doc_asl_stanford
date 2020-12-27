@@ -1,8 +1,8 @@
-ASL Data Pre-processing
-=======================
+Data Preparation
+================
 
-Introduction
-------------
+Data Description
+----------------
 
 The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. These files were exported directly from the scanner.
 

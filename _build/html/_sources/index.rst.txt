@@ -1,19 +1,41 @@
-BASIL toolset
-=============
+===================================================
+Arterial spin labeling (ASL) Data Analysis Tutorial
+===================================================
 
-BASIL is a collection of tools that aid in the creation of quantitative 
-CBF images from ASL data. It is available within `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_ 
-(v6.0.1 or later is strongly recommended). 
+This tutorial aims to demonstrate how to obtain perfusion or cerebral blood flow (CBF) using ASL MRI data collected by GE 3T MRI (or PET/MRI) scanners at Stanford University.
 
-BASIL includes complete high-level pipelines for
-processing ASL data and also individual tools for more bespoke analysis. 
+Pre-requisite
+-------------
+
+1 Download and install `FSL <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki>`_
+
+2 Download and install `dcm2niix <https://github.com/rordenlab/dcm2niix>`_
+
+3 Understand the basics of `ASL <http://mriquestions.com/what-is-asl.html>`_
+
+4 Able to visualize MRI data in NIfTI format
+
+
+Sample Data
+-----------
+
+We will use a sample dataset of a healthy volunteer collected by a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. This dataset can be downloaded here.
+
 
 .. toctree::
    :maxdepth: 2
    
-   test
+   data_preparation
 
-   
+   structural_image_processing
+
+   asl_pre_processing
+
+   cbf_quantification
+
+
+
+
 References
 ==========
 
