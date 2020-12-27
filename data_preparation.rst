@@ -1,7 +1,7 @@
 Data Preparation
 ================
 
-Data description
+Data Description
 ----------------
 
 The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. These files were exported directly from the scanner.
@@ -23,7 +23,7 @@ Number of excitations (NEX): 3
 TR of M0 image: 2 seconds
 
 
-Convert from DICOM to NifTI format
+Convert from DICOM to NifTI Format
 ----------------------------------
 
 We use the `dcm2niix <https://github.com/rordenlab/dcm2niix>`_ software to convert the DICOM files to NIfTI format.
