@@ -54,20 +54,16 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dcm2niix</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span> <span class="o">-</span><span class="n">z</span> <span class="n">y</span> <span class="n">T1_structure</span>
 </pre></div>
 </div>
-<p>Rename the T1-weighted structural image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">T1_structure_Ax_FSPGR_BRAVO_20190215105911_30</span> <span class="n">T1_structure</span>
-</pre></div>
-</div>
 <p>For the ASL label/control difference image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dcm2niix</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span> <span class="o">-</span><span class="n">z</span> <span class="n">y</span> <span class="n">ASL</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dcm2niix</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span> <span class="o">-</span><span class="n">f</span> <span class="n">ASL_data</span> <span class="o">-</span><span class="n">z</span> <span class="n">y</span> <span class="n">ASL</span>
 </pre></div>
 </div>
 <p>Rename the ASL label/control difference image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">ASL_prod</span><span class="o">.</span><span class="n">_ASL_NEX3_fatsupp_20190215105911_11</span> <span class="n">ASL_diff</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">ASL_data</span> <span class="n">ASL_diff</span>
 </pre></div>
 </div>
 <p>Rename the proton density M0 image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">ASL_prod</span><span class="o">.</span><span class="n">_ASL_NEX3_fatsupp_20190215105911_11a</span> <span class="n">M0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">ASL_dataa</span> <span class="n">M0</span>
 </pre></div>
 </div>
 </div>
@@ -117,7 +113,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="structural_image_processing.html">Structural Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asl_pre_processing.html">ASL Data Pre-processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">Cerebrovascular Reserve Quantification Using ASL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">CBF Quantification</a></li>
 </ul>
 
 <div class="relations">

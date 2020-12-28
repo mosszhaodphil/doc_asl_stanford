@@ -15,7 +15,7 @@
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Cerebrovascular Reserve Quantification Using ASL" href="cbf_quantification.html" />
+    <link rel="next" title="CBF Quantification" href="cbf_quantification.html" />
     <link rel="prev" title="Structural Image Processing" href="structural_image_processing.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -37,54 +37,60 @@
 <h1>ASL Data Pre-processing<a class="headerlink" href="#asl-data-pre-processing" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE’s product sequence. These files were exported directly from the scanner.</p>
-<p>For the ASL data, the file contains the ASL label/control difference image and the proton density M0 image. The main acquisition parameters of our sample ASL data are:</p>
-<p>labeling duration: 1.45 seconds &lt;which dicom field&gt;</p>
-<p>post-labeling delay: 2.025 seconds &lt;which dicom field&gt;</p>
-<p>labeling efficiency: 85%</p>
-<p>Number of backgroun suppressions: 3</p>
-<p>Signal reduction due to background suppression: 9%</p>
-<p>Number of excitations (NEX): 3</p>
-<p>TR of M0 image: 2 seconds</p>
+<p>Our ASL data contains the label/control difference and proton density M0 images, sufficient for quantifying CBF in absolute units (ml/100g/min). Before we perform quantification, we need to pre-process the data to</p>
+<p>1 create a registration beteen the T1-weighted structural and ASL space</p>
+<p>2 create an analysis mask in ASL space</p>
+<p>3 compute the mean signal of the ASL label/control difference image</p>
+<p>4 compute the equilibrium magnetization of the arterial blood (M0 blood)</p>
 </div>
-<div class="section" id="convert-from-dicom-to-nifti-format">
-<h2>Convert from DICOM to NifTI Format<a class="headerlink" href="#convert-from-dicom-to-nifti-format" title="Permalink to this headline">¶</a></h2>
-<p>We use the <a class="reference external" href="https://github.com/rordenlab/dcm2niix">dcm2niix</a> software to convert the DICOM files to NIfTI format.</p>
-<p>For the T1-weighted structural image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dcm2niix</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span> <span class="o">-</span><span class="n">z</span> <span class="n">y</span> <span class="n">T1_structure</span>
+<div class="section" id="registration-between-t1-weighted-structural-and-asl-space">
+<h2>Registration between T1-weighted Structural and ASL Space<a class="headerlink" href="#registration-between-t1-weighted-structural-and-asl-space" title="Permalink to this headline">¶</a></h2>
+<p>We use the <a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/oxford_asl/UserGuide">asl_reg</a> command to perform registration between T1-weighted Structural and ASL Space:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asl_reg</span> <span class="o">-</span><span class="n">i</span> <span class="n">asl_diff</span> <span class="o">-</span><span class="n">o</span> <span class="n">output_asl_reg</span> <span class="o">-</span><span class="n">s</span> <span class="n">fsl_anat_dir</span><span class="o">.</span><span class="n">anat</span><span class="o">/</span><span class="n">T1_biascorr</span> <span class="o">--</span><span class="n">sbet</span> <span class="n">fsl_anat_dir</span><span class="o">.</span><span class="n">anat</span><span class="o">/</span><span class="n">T1_biascorr_brain</span> <span class="o">-</span><span class="n">c</span> <span class="n">M0</span>
 </pre></div>
 </div>
-<p>Rename the T1-weighted structural image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">T1_structure_Ax_FSPGR_BRAVO_20190215105911_30</span> <span class="n">T1_structure</span>
+<p>The registration results are saved in output_asl_reg folder.</p>
+</div>
+<div class="section" id="create-an-analysis-mask-in-asl-space">
+<h2>Create an analysis mask in ASL space<a class="headerlink" href="#create-an-analysis-mask-in-asl-space" title="Permalink to this headline">¶</a></h2>
+<p>Once we have created the registration between the ASL and T1-weighted structural image, we are going to use the brain mask in the structural image space to create an analysis mask in the ASL space:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flirt</span> <span class="o">-</span><span class="ow">in</span> <span class="n">fsl_anat_dir</span><span class="o">.</span><span class="n">anat</span><span class="o">/</span><span class="n">T1_biascorr_brain_mask</span> <span class="o">-</span><span class="n">ref</span> <span class="n">asl_diff</span> <span class="o">-</span><span class="n">applyxfm</span> <span class="o">-</span><span class="n">init</span> <span class="n">output_asl_reg</span><span class="o">/</span><span class="n">struct2asl</span><span class="o">.</span><span class="n">mat</span> <span class="o">-</span><span class="n">out</span> <span class="n">mask</span> <span class="o">-</span><span class="n">interp</span> <span class="n">trilinear</span> <span class="o">-</span><span class="n">paddingsize</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>For the ASL label/control difference image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dcm2niix</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span> <span class="o">-</span><span class="n">z</span> <span class="n">y</span> <span class="n">ASL</span>
+<p>We also slighly eroce the mask the cover most of the brain regions in the ASL space:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fslmaths</span> <span class="n">mask</span> <span class="o">-</span><span class="n">kernel</span> <span class="mi">2</span><span class="n">D</span> <span class="o">-</span><span class="n">ero</span> <span class="o">-</span><span class="nb">bin</span> <span class="o">-</span><span class="n">fillh</span> <span class="n">mask</span>
 </pre></div>
 </div>
-<p>Rename the ASL label/control difference image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">ASL_prod</span><span class="o">.</span><span class="n">_ASL_NEX3_fatsupp_20190215105911_11</span> <span class="n">ASL_diff</span>
+<p>Now we can visualize the mask on top of the ASL data. The blue semitransparent layer is the mask.</p>
+<img alt="_images/mask.png" src="_images/mask.png" />
+</div>
+<div class="section" id="compute-the-mean-signal-of-the-asl-label-control-difference-image">
+<h2>Compute the Mean Signal of the ASL label/control Difference Image<a class="headerlink" href="#compute-the-mean-signal-of-the-asl-label-control-difference-image" title="Permalink to this headline">¶</a></h2>
+<p>In this step, we are going to create the mean ASL label/control different image. Since the reconstruction process of GE scanners have placed a global scaling factor of 32 to all ASL data, we need to divide this from our ASL label/control image. Also since the number of excitations (NEX) is 3 in our acquisition, we also need to divide this value to obtain the mean ASL label/control different image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fslmaths</span> <span class="n">asl_diff</span> <span class="o">-</span><span class="n">div</span> <span class="mi">32</span> <span class="o">-</span><span class="n">div</span> <span class="mi">3</span> <span class="n">asl_diff_mean</span>
 </pre></div>
 </div>
-<p>Rename the proton density M0 image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">immv</span> <span class="n">ASL_prod</span><span class="o">.</span><span class="n">_ASL_NEX3_fatsupp_20190215105911_11a</span> <span class="n">M0</span>
+</div>
+<div class="section" id="compute-the-equilibrium-magnetization-of-the-arterial-blood-m0-blood">
+<h2>Compute the Equilibrium Magnetization of the Arterial Blood (M0 blood)<a class="headerlink" href="#compute-the-equilibrium-magnetization-of-the-arterial-blood-m0-blood" title="Permalink to this headline">¶</a></h2>
+<p>In order to compute CBF in absolute units (ml/100g/min), we need a calibration data that tell us the concentration of the labeled spins in the brain. This is essentially the equilibrium magnetization of the arterial blood (M0 blood). We use the proton density M0 (essentially the equilibirum of spins in the brain tissues) to estimate M0 blood. Here we assume that the tissue/blood partition coefficients (λ) to be 90%:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fslmaths</span> <span class="n">M0</span> <span class="o">-</span><span class="n">div</span> <span class="mf">0.9</span> <span class="n">M0a</span>
 </pre></div>
 </div>
+<p>The signal on the edge of the brain is very low because it was affected by partial volume effects. Without correction, this would cause the CBF value of the edge of the brain to be very high. We can correct the partial volume effects using a simple erosion and extrapolation technique. We first remove the voxels of the edge of the brain using erosion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fslmaths</span> <span class="n">M0a</span> <span class="o">-</span><span class="n">ero</span> <span class="n">M0a_ero</span>
+</pre></div>
 </div>
-<div class="section" id="visualize-the-images">
-<h2>Visualize the Images<a class="headerlink" href="#visualize-the-images" title="Permalink to this headline">¶</a></h2>
-<p>We use <a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSLeyes">FSLeyes</a> to view the T1-wieghted structural and ASL images.</p>
-<p>We can view the T1-wieghted structural image, which should look like the following:</p>
-<img alt="_images/T1_structure.png" src="_images/T1_structure.png" />
-<p>The ASL label/control difference image should look like the following:</p>
-<img alt="_images/ASL_label_control.png" src="_images/ASL_label_control.png" />
-<p>The proton density M0 image should look like the following:</p>
-<img alt="_images/M0.png" src="_images/M0.png" />
+<p>Then we extrapolate the values back using its neighbors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asl_file</span> <span class="o">--</span><span class="n">data</span><span class="o">=</span><span class="n">M0a_ero</span> <span class="o">--</span><span class="n">ntis</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="n">mask</span><span class="o">=</span><span class="n">mask</span> <span class="o">--</span><span class="n">extrapolate</span> <span class="o">--</span><span class="n">out</span><span class="o">=</span><span class="n">M0a_ero_extra</span>
+</pre></div>
 </div>
-<div class="section" id="potential-issues">
-<h2>Potential Issues<a class="headerlink" href="#potential-issues" title="Permalink to this headline">¶</a></h2>
-<p>It is possible that the the ASL label/control different and M0 images are store together in a single NifTI file. We may use the command tool <a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Fslutils">fslroi</a> to separate the images.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fslroi</span> <span class="o">&lt;</span><span class="nb">input</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">tmin</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">tsize</span><span class="o">&gt;</span>
+<p>Since the equilibrium magnetization of the arterial blood reflects the density of the labeled blood water, which should be consistennt throughout the brain, we should expect the M0a data to be very homogenious. We can apply a medium filter to remove the salt-and-pepper noise:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fslmaths</span> <span class="n">M0a_ero_extra</span> <span class="o">-</span><span class="n">fmedian</span> <span class="o">-</span><span class="n">mas</span> <span class="n">mask</span> <span class="n">M0a</span>
+</pre></div>
+</div>
+<p>We can remove the intermediate files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">imrm</span> <span class="n">M0a_ero</span> <span class="n">M0a_ero_extra</span>
 </pre></div>
 </div>
 </div>
@@ -112,12 +118,13 @@
 <li class="toctree-l1"><a class="reference internal" href="structural_image_processing.html">Structural Image Processing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ASL Data Pre-processing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#convert-from-dicom-to-nifti-format">Convert from DICOM to NifTI Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#visualize-the-images">Visualize the Images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#potential-issues">Potential Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registration-between-t1-weighted-structural-and-asl-space">Registration between T1-weighted Structural and ASL Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-an-analysis-mask-in-asl-space">Create an analysis mask in ASL space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compute-the-mean-signal-of-the-asl-label-control-difference-image">Compute the Mean Signal of the ASL label/control Difference Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compute-the-equilibrium-magnetization-of-the-arterial-blood-m0-blood">Compute the Equilibrium Magnetization of the Arterial Blood (M0 blood)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">Cerebrovascular Reserve Quantification Using ASL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">CBF Quantification</a></li>
 </ul>
 
 <div class="relations">
@@ -125,7 +132,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="structural_image_processing.html" title="previous chapter">Structural Image Processing</a></li>
-      <li>Next: <a href="cbf_quantification.html" title="next chapter">Cerebrovascular Reserve Quantification Using ASL</a></li>
+      <li>Next: <a href="cbf_quantification.html" title="next chapter">CBF Quantification</a></li>
   </ul></li>
 </ul>
 </div>

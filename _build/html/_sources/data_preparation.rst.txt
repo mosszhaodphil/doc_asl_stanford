@@ -32,21 +32,17 @@ For the T1-weighted structural image::
 
     dcm2niix -o ./ -z y T1_structure
 
-Rename the T1-weighted structural image::
-
-    immv T1_structure_Ax_FSPGR_BRAVO_20190215105911_30 T1_structure
-
 For the ASL label/control difference image::
 
-    dcm2niix -o ./ -z y ASL
+    dcm2niix -o ./ -f ASL_data -z y ASL
 
 Rename the ASL label/control difference image::
 
-    immv ASL_prod._ASL_NEX3_fatsupp_20190215105911_11 ASL_diff
+    immv ASL_data ASL_diff
 
 Rename the proton density M0 image::
 
-    immv ASL_prod._ASL_NEX3_fatsupp_20190215105911_11a M0
+    immv ASL_dataa M0
 
 
 Visualize the Images

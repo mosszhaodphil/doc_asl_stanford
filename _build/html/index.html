@@ -45,6 +45,9 @@
 <div class="section" id="sample-data">
 <h2>Sample Data<a class="headerlink" href="#sample-data" title="Permalink to this headline">¶</a></h2>
 <p>We will use a sample dataset of a healthy volunteer collected by a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE’s product sequence. This dataset can be downloaded here.</p>
+</div>
+<div class="section" id="content">
+<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="data_preparation.html">Data Preparation</a><ul>
@@ -62,31 +65,29 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="asl_pre_processing.html">ASL Data Pre-processing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#convert-from-dicom-to-nifti-format">Convert from DICOM to NifTI Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#visualize-the-images">Visualize the Images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#potential-issues">Potential Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#registration-between-t1-weighted-structural-and-asl-space">Registration between T1-weighted Structural and ASL Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#create-an-analysis-mask-in-asl-space">Create an analysis mask in ASL space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#compute-the-mean-signal-of-the-asl-label-control-difference-image">Compute the Mean Signal of the ASL label/control Difference Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asl_pre_processing.html#compute-the-equilibrium-magnetization-of-the-arterial-blood-m0-blood">Compute the Equilibrium Magnetization of the Arterial Blood (M0 blood)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">Cerebrovascular Reserve Quantification Using ASL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cbf_quantification.html#cvr-quantification-using-single-pld-pcasl">CVR quantification using Single PLD pCASL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">CBF Quantification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cbf_quantification.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbf_quantification.html#id1">CBF Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbf_quantification.html#calibration">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbf_quantification.html#transform-from-asl-to-mni-152-2mm-space">Transform from ASL to MNI-152 2mm Space</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="references">
 <h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<p>If you employ BASIL in your research please reference the article below, plus any others
-that specifically relate to the analysis you have performed:</p>
+<p>You may include the following description in your manuscript:</p>
+<p>Voxel-wise CBF in absolute units was estimated by fitting the ASL label/control difference data to the general kinetic model using the variational Bayesian inference technque [1, 2]. The artifact on the edge of the brain due to partial volume effects was corrected using a erosion and extrapolatino technique [3].</p>
 <blockquote>
-<div><ul class="simple">
-<li><p><em>Chappell MA, Groves AR, Whitcher B, Woolrich MW. Variational Bayesian inference for a non-linear forward model. IEEE Transactions on Signal Processing 57(1):223-236, 2009.</em></p></li>
-</ul>
-</div></blockquote>
-<p>If you employ spatial regularisation (priors) you should ideally reference this article too:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><em>A.R. Groves, M.A. Chappell, M.W. Woolrich, Combined Spatial and Non-Spatial Prior for Inference on MRI Time-Series , NeuroImage 45(3) 795-809, 2009.</em></p></li>
-</ul>
+<div><p>[1]    <em>Chappell, M.A., Groves, A.R., Whitcher, B., Woolrich, M.W., 2009. Variational Bayesian Inference for a Nonlinear Forward Model. IEEE Trans. Signal Process. 57, 223–236. https://doi.org/10.1109/TSP.2008.2005752</em></p>
+<p>[2]    <em>Groves, A.R., Chappell, M.A., Woolrich, M.W., 2009. Combined spatial and non-spatial prior for inference on MRI time-series. NeuroImage 45, 795–809. https://doi.org/10.1016/j.neuroimage.2008.12.027</em></p>
+<p>[3]    <em>Zhao, M.Y., Mezue, M., Segerdahl, A.R., Okell, T.W., Tracey, I., Xiao, Y., Chappell, M.A., 2017. A systematic study of the sensitivity of partial volume correction methods for the quantification of perfusion from pseudo-continuous arterial spin labeling MRI. NeuroImage 162, 384–397. https://doi.org/10.1016/j.neuroimage.2017.08.072</em></p>
 </div></blockquote>
 </div>
 </div>
@@ -113,7 +114,7 @@ that specifically relate to the analysis you have performed:</p>
 <li class="toctree-l1"><a class="reference internal" href="data_preparation.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="structural_image_processing.html">Structural Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asl_pre_processing.html">ASL Data Pre-processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">Cerebrovascular Reserve Quantification Using ASL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cbf_quantification.html">CBF Quantification</a></li>
 </ul>
 
 <div class="relations">
