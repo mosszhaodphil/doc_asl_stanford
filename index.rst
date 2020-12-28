@@ -44,7 +44,9 @@ that specifically relate to the analysis you have performed:
 
 
  [1]	*M. A. Chappell, A. R. Groves, B. Whitcher, and M. W. Woolrich, “Variational Bayesian Inference for a Nonlinear Forward Model,” IEEE Trans. Signal Process., vol. 57, no. 1, pp. 223–236, 2009, doi: 10.1109/TSP.2008.2005752.*
+
  [2]	*A. R. Groves, M. A. Chappell, and M. W. Woolrich, “Combined spatial and non-spatial prior for inference on MRI time-series,” NeuroImage, vol. 45, no. 3, pp. 795–809, 2009, doi: 10.1016/j.neuroimage.2008.12.027.*
+ 
  [3]	*M. Y. Zhao et al., “A systematic study of the sensitivity of partial volume correction methods for the quantification of perfusion from pseudo-continuous arterial spin labeling MRI,” NeuroImage, vol. 162, pp. 384–397, Nov. 2017, doi: 10.1016/j.neuroimage.2017.08.072.*
 
 
