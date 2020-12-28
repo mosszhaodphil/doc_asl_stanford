@@ -8,9 +8,9 @@ The `sample dataset <https://github.com/mosszhaodphil/doc_asl_stanford/tree/mast
 
 For the ASL data, the file contains the ASL label/control difference image and the proton density M0 image. The main acquisition parameters of our sample ASL data are:
 
-labeling duration: 1.45 seconds <which dicom field>
+labeling duration: 1.45 seconds
 
-post-labeling delay: 2.025 seconds <which dicom field>
+post-labeling delay: 2.025 seconds
 
 labeling efficiency: 85%
 
