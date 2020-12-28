@@ -44,9 +44,9 @@ You may include the following description in your manuscript:
 Voxel-wise CBF in absolute units was estimated by fitting the ASL label/control difference data to the general kinetic model using the variational Bayesian inference technque [1, 2]. The artifact on the edge of the brain due to partial volume effects was corrected using a erosion and extrapolatino technique [3].
 
 
- [1]	*M. A. Chappell, A. R. Groves, B. Whitcher, and M. W. Woolrich, “Variational Bayesian Inference for a Nonlinear Forward Model,” IEEE Trans. Signal Process., vol. 57, no. 1, pp. 223–236, 2009, doi: 10.1109/TSP.2008.2005752.*
+ [1]	*Chappell, M.A., Groves, A.R., Whitcher, B., Woolrich, M.W., 2009. Variational Bayesian Inference for a Nonlinear Forward Model. IEEE Trans. Signal Process. 57, 223–236. https://doi.org/10.1109/TSP.2008.2005752*
 
- [2]	*A. R. Groves, M. A. Chappell, and M. W. Woolrich, “Combined spatial and non-spatial prior for inference on MRI time-series,” NeuroImage, vol. 45, no. 3, pp. 795–809, 2009, doi: 10.1016/j.neuroimage.2008.12.027.*
+ [2]	*Groves, A.R., Chappell, M.A., Woolrich, M.W., 2009. Combined spatial and non-spatial prior for inference on MRI time-series. NeuroImage 45, 795–809. https://doi.org/10.1016/j.neuroimage.2008.12.027*
 
- [3]	*M. Y. Zhao et al., “A systematic study of the sensitivity of partial volume correction methods for the quantification of perfusion from pseudo-continuous arterial spin labeling MRI,” NeuroImage, vol. 162, pp. 384–397, Nov. 2017, doi: 10.1016/j.neuroimage.2017.08.072.*
+ [3]	*Zhao, M.Y., Mezue, M., Segerdahl, A.R., Okell, T.W., Tracey, I., Xiao, Y., Chappell, M.A., 2017. A systematic study of the sensitivity of partial volume correction methods for the quantification of perfusion from pseudo-continuous arterial spin labeling MRI. NeuroImage 162, 384–397. https://doi.org/10.1016/j.neuroimage.2017.08.072*
 
