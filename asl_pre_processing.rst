@@ -4,76 +4,69 @@ ASL Data Pre-processing
 Introduction
 ------------
 
-The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. These files were exported directly from the scanner.
+Our ASL data contains the label/control difference and proton density M0 images, sufficient for quantifying CBF in absolute units (ml/100g/min). Before we perform quantification, we need to pre-process the data to 
 
-For the ASL data, the file contains the ASL label/control difference image and the proton density M0 image. The main acquisition parameters of our sample ASL data are:
+1 create a registration beteen the T1-weighted structural and ASL space
 
-labeling duration: 1.45 seconds <which dicom field>
+2 create an analysis mask in ASL space
 
-post-labeling delay: 2.025 seconds <which dicom field>
+3 compute the mean signal of the ASL label/control difference image
 
-labeling efficiency: 85%
-
-Number of backgroun suppressions: 3
-
-Signal reduction due to background suppression: 9%
-
-Number of excitations (NEX): 3
-
-TR of M0 image: 2 seconds
+4 compute the equilibrium magnetization of the arterial blood (M0 blood)
 
 
-Convert from DICOM to NifTI Format
-----------------------------------
+Registration between T1-weighted Structural and ASL Space
+---------------------------------------------------------
 
-We use the `dcm2niix <https://github.com/rordenlab/dcm2niix>`_ software to convert the DICOM files to NIfTI format.
+We use the `asl_reg <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/oxford_asl/UserGuide>`_ command to perform registration between T1-weighted Structural and ASL Space::
 
-For the T1-weighted structural image::
+    asl_reg -i asl_diff -o output_asl_reg -s fsl_anat_dir.anat/T1_biascorr --sbet fsl_anat_dir.anat/T1_biascorr_brain -c M0
 
-    dcm2niix -o ./ -z y T1_structure
-
-Rename the T1-weighted structural image::
-
-    immv T1_structure_Ax_FSPGR_BRAVO_20190215105911_30 T1_structure
-
-For the ASL label/control difference image::
-
-    dcm2niix -o ./ -z y ASL
-
-Rename the ASL label/control difference image::
-
-    immv ASL_prod._ASL_NEX3_fatsupp_20190215105911_11 ASL_diff
-
-Rename the proton density M0 image::
-
-    immv ASL_prod._ASL_NEX3_fatsupp_20190215105911_11a M0
+The registration results are saved in output_asl_reg folder.
 
 
-Visualize the Images
---------------------
+Create an analysis mask in ASL space
+------------------------------------
 
-We use `FSLeyes <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSLeyes>`_ to view the T1-wieghted structural and ASL images.
+Once we have created the registration between the ASL and T1-weighted structural image, we are going to use the brain mask in the structural image space to create an analysis mask in the ASL space::
 
-We can view the T1-wieghted structural image, which should look like the following:
+    flirt -in fsl_anat_dir.anat/T1_biascorr_brain_mask -ref asl_diff -applyxfm -init output_asl_reg/struct2asl.mat -out mask -interp trilinear -paddingsize 1
 
-.. image:: /images/data_preparation/T1_structure.png
+We also slighly eroce the mask the cover most of the brain regions in the ASL space::
 
-The ASL label/control difference image should look like the following:
+    fslmaths mask -kernel 2D -ero -bin -fillh mask
 
-.. image:: /images/data_preparation/ASL_label_control.png
+Now we can visualize the mask on top of the ASL data. The blue semitransparent layer is the mask.
 
-The proton density M0 image should look like the following:
-
-.. image:: /images/data_preparation/M0.png
+.. image:: /images/asl_pre_processing/mask.png
 
 
-Potential Issues
-----------------
+Compute the Mean Signal of the ASL label/control Difference Image
+-----------------------------------------------------------------
 
-It is possible that the the ASL label/control different and M0 images are store together in a single NifTI file. We may use the command tool `fslroi <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Fslutils>`_ to separate the images. ::
+In this step, we are going to create the mean ASL label/control different image. Since the reconstruction process of GE scanners have placed a global scaling factor of 32 to all ASL data, we need to divide this from our ASL label/control image. Also since the number of excitations (NEX) is 3 in our acquisition, we also need to divide this value to obtain the mean ASL label/control different image::
 
-    fslroi <input> <output> <tmin> <tsize>
+    fslmaths asl_diff -div 32 -div 3 asl_diff_mean
 
+Compute the Equilibrium Magnetization of the Arterial Blood (M0 blood)
+----------------------------------------------------------------------
 
+In order to compute CBF in absolute units (ml/100g/min), we need a calibration data that tell us the concentration of the labeled spins in the brain. This is essentially the equilibrium magnetization of the arterial blood (M0 blood). We use the proton density M0 (essentially the equilibirum of spins in the brain tissues) to estimate M0 blood. Here we assume that the tissue/blood partition coefficients (λ) to be 90%::
 
+    fslmaths M0 -div 0.9 M0a
 
+The signal on the edge of the brain is very low because it was affected by partial volume effects. Without correction, this would cause the CBF value of the edge of the brain to be very high. We can correct the partial volume effects using a simple erosion and extrapolation technique. We first remove the voxels of the edge of the brain using erosion::
+
+    fslmaths M0a -ero M0a_ero
+
+Then we extrapolate the values back using its neighbors::
+
+    asl_file --data=M0a_ero --ntis=1 --mask=mask --extrapolate --out=M0a_ero_extra
+
+Since the equilibrium magnetization of the arterial blood reflects the density of the labeled blood water, which should be consistennt throughout the brain, we should expect the M0a data to be very homogenious. We can apply a medium filter to remove the salt-and-pepper noise::
+
+    fslmaths M0a_ero_extra -fmedian -mas mask M0a
+
+We can remove the intermediate files::
+
+    imrm M0a_ero M0a_ero_extra
