@@ -16,7 +16,7 @@ For the T1-weighted structural image::
 
     fsl_anat -i T1_structure -o fsl_anat_dir --nosubcortseg
 
-The results are saved in the fsl_anat_dir.anat folder.
+The process may take a while to finish. The results are saved in the fsl_anat_dir.anat folder.
 
 Further Reading
 ---------------
