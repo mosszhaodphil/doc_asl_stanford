@@ -42,11 +42,18 @@ References
 If you employ BASIL in your research please reference the article below, plus any others 
 that specifically relate to the analysis you have performed:
 
+
+ [1]	*M. A. Chappell, A. R. Groves, B. Whitcher, and M. W. Woolrich, “Variational Bayesian Inference for a Nonlinear Forward Model,” IEEE Trans. Signal Process., vol. 57, no. 1, pp. 223–236, 2009, doi: 10.1109/TSP.2008.2005752.*
+ [2]	*A. R. Groves, M. A. Chappell, and M. W. Woolrich, “Combined spatial and non-spatial prior for inference on MRI time-series,” NeuroImage, vol. 45, no. 3, pp. 795–809, 2009, doi: 10.1016/j.neuroimage.2008.12.027.*
+ [3]	*M. Y. Zhao et al., “A systematic study of the sensitivity of partial volume correction methods for the quantification of perfusion from pseudo-continuous arterial spin labeling MRI,” NeuroImage, vol. 162, pp. 384–397, Nov. 2017, doi: 10.1016/j.neuroimage.2017.08.072.*
+
+
+
  [1] *Chappell MA, Groves AR, Whitcher B, Woolrich MW. Variational Bayesian inference for a non-linear forward model. IEEE Transactions on Signal Processing 57(1):223-236, 2009.*
 
-If you employ spatial regularisation (priors) you should ideally reference this article too:
-
  [2] *A.R. Groves, M.A. Chappell, M.W. Woolrich, Combined Spatial and Non-Spatial Prior for Inference on MRI Time-Series , NeuroImage 45(3) 795-809, 2009.*
+
+ [3] *M.Y. Zhao, M.Mezue, A.R.Segerdahl, T.W.Okell, I.Tracey, Y.Xiao, M.M.A. Chappell, M.W. Woolrich, Combined Spatial and Non-Spatial Prior for Inference on MRI Time-Series , NeuroImage 45(3) 795-809, 2009.*
 
 
   
