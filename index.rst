@@ -22,6 +22,9 @@ Sample Data
 We will use a sample dataset of a healthy volunteer collected by a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. This dataset can be downloaded here.
 
 
+Content
+-------
+
 .. toctree::
    :maxdepth: 2
    
@@ -32,8 +35,6 @@ We will use a sample dataset of a healthy volunteer collected by a GE 3T MRI sys
    asl_pre_processing
 
    cbf_quantification
-
-
 
 
 References
