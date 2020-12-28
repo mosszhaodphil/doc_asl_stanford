@@ -4,7 +4,7 @@ Data Preparation
 Data Description
 ----------------
 
-The sample dataset was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. These files were exported directly from the scanner.
+The `sample dataset <https://github.com/mosszhaodphil/doc_asl_stanford/tree/master/data>`_ was acquired using a GE 3T MRI system. The dataset includes a T1 weighted structural image and an ASL image acquired using GE's product sequence. These files were exported directly from the scanner.
 
 For the ASL data, the file contains the ASL label/control difference image and the proton density M0 image. The main acquisition parameters of our sample ASL data are:
 
