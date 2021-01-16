@@ -14,7 +14,7 @@ We use the `fsl_anat <https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/fsl_anat>`_ to impr
 
 For the T1-weighted structural image::
 
-    fsl_anat -i T1_structure -o fsl_anat_dir --nosubcortseg
+    fsl_anat -i T1 -o fsl_anat_dir --nosubcortseg
 
 The process may take a while to finish. The results are saved in the fsl_anat_dir.anat folder.
 

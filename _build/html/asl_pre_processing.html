@@ -38,7 +38,7 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Our ASL data contains the label/control difference and proton density M0 images, sufficient for quantifying CBF in absolute units (ml/100g/min). Before we perform quantification, we need to pre-process the data to</p>
-<p>1 create a registration beteen the T1-weighted structural and ASL space</p>
+<p>1 create a registration between the T1-weighted structural and ASL space</p>
 <p>2 create an analysis mask in ASL space</p>
 <p>3 compute the mean signal of the ASL label/control difference image</p>
 <p>4 compute the equilibrium magnetization of the arterial blood (M0 blood)</p>
@@ -57,7 +57,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flirt</span> <span class="o">-</span><span class="ow">in</span> <span class="n">fsl_anat_dir</span><span class="o">.</span><span class="n">anat</span><span class="o">/</span><span class="n">T1_biascorr_brain_mask</span> <span class="o">-</span><span class="n">ref</span> <span class="n">asl_diff</span> <span class="o">-</span><span class="n">applyxfm</span> <span class="o">-</span><span class="n">init</span> <span class="n">output_asl_reg</span><span class="o">/</span><span class="n">struct2asl</span><span class="o">.</span><span class="n">mat</span> <span class="o">-</span><span class="n">out</span> <span class="n">mask</span> <span class="o">-</span><span class="n">interp</span> <span class="n">trilinear</span> <span class="o">-</span><span class="n">paddingsize</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>We also slighly eroce the mask the cover most of the brain regions in the ASL space:</p>
+<p>We also slighly erode the mask the cover most of the brain regions in the ASL space:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fslmaths</span> <span class="n">mask</span> <span class="o">-</span><span class="n">kernel</span> <span class="mi">2</span><span class="n">D</span> <span class="o">-</span><span class="n">ero</span> <span class="o">-</span><span class="nb">bin</span> <span class="o">-</span><span class="n">fillh</span> <span class="n">mask</span>
 </pre></div>
 </div>

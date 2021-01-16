@@ -6,7 +6,7 @@ Introduction
 
 Our ASL data contains the label/control difference and proton density M0 images, sufficient for quantifying CBF in absolute units (ml/100g/min). Before we perform quantification, we need to pre-process the data to 
 
-1 create a registration beteen the T1-weighted structural and ASL space
+1 create a registration between the T1-weighted structural and ASL space
 
 2 create an analysis mask in ASL space
 
@@ -32,7 +32,7 @@ Once we have created the registration between the ASL and T1-weighted structural
 
     flirt -in fsl_anat_dir.anat/T1_biascorr_brain_mask -ref asl_diff -applyxfm -init output_asl_reg/struct2asl.mat -out mask -interp trilinear -paddingsize 1
 
-We also slighly eroce the mask the cover most of the brain regions in the ASL space::
+We also slighly erode the mask the cover most of the brain regions in the ASL space::
 
     fslmaths mask -kernel 2D -ero -bin -fillh mask
 

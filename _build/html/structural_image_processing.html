@@ -43,7 +43,7 @@
 <h2>Processing the T1-weighted Structural Image<a class="headerlink" href="#processing-the-t1-weighted-structural-image" title="Permalink to this headline">¶</a></h2>
 <p>We use the <a class="reference external" href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/fsl_anat">fsl_anat</a> to improve the quality of the T1-weighted structural image. The procedure includes: automated cropping, bias field correction, brain extraction, linear and non-linear registration, tissue segmentation:</p>
 <p>For the T1-weighted structural image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fsl_anat</span> <span class="o">-</span><span class="n">i</span> <span class="n">T1_structure</span> <span class="o">-</span><span class="n">o</span> <span class="n">fsl_anat_dir</span> <span class="o">--</span><span class="n">nosubcortseg</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fsl_anat</span> <span class="o">-</span><span class="n">i</span> <span class="n">T1</span> <span class="o">-</span><span class="n">o</span> <span class="n">fsl_anat_dir</span> <span class="o">--</span><span class="n">nosubcortseg</span>
 </pre></div>
 </div>
 <p>The process may take a while to finish. The results are saved in the fsl_anat_dir.anat folder.</p>

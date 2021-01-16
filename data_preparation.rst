@@ -30,7 +30,7 @@ We use the `dcm2niix <https://github.com/rordenlab/dcm2niix>`_ software to conve
 
 For the T1-weighted structural image::
 
-    dcm2niix -o ./ -z y T1_structure
+    dcm2niix -o ./ -z y T1
 
 For the ASL label/control difference image::
 
