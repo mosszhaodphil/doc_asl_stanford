@@ -42,7 +42,7 @@ References
 
 You may include the following description in your manuscript:
 
-Voxel-wise CBF in absolute units was estimated by fitting the ASL label/control difference data to the general kinetic model using the variational Bayesian inference technque [1, 2]. The artifact on the edge of the brain due to partial volume effects was corrected using a erosion and extrapolatino technique [3].
+Voxel-wise CBF in absolute units was estimated by fitting the ASL label/control difference data to the general kinetic model using the variational Bayesian inference technque [1, 2]. The artifact on the edge of the brain due to partial volume effects was corrected using the erosion and extrapolatino technique [3].
 
 
  [1]	*Chappell, M.A., Groves, A.R., Whitcher, B., Woolrich, M.W., 2009. Variational Bayesian Inference for a Nonlinear Forward Model. IEEE Trans. Signal Process. 57, 223–236. https://doi.org/10.1109/TSP.2008.2005752*
